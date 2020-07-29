@@ -1217,6 +1217,9 @@ module.exports = function createGame(options) {
             // Put the old card back into the deck
             deck = shuffle(deck.concat( playerState.influence[0].role ))
             playerState.influence[0].role = "[PlACEHOLDER]"
+            // give the next player a new card
+            nextPlayerIdx = NextPlayerIdx();
+            state.players[nextPlayerIdx].influence[0].role = deck.pop();
         } else if (actionState.action == 'assassinate') {
             message = format('{%d} assassinated {%d}', playerIdx, actionState.target);
             target = state.players[actionState.target];
@@ -1325,18 +1328,14 @@ module.exports = function createGame(options) {
 
     function nextTurn() {
         debug('next turn');
-        var next_player;
         if (state.state.name != stateNames.WAITING_FOR_PLAYERS) {
             turnHistGroup++;
-            next_player = nextPlayerIdx();
             setState({
                 name: stateNames.START_OF_TURN,
-                playerIdx: next_player
+                playerIdx: nextPlayerIdx()
             });
             gameTracker.startOfTurn(state);
         }
-        // Give the next player a new card
-        state.players[next_player].influences[0].role = deck.pop();
     }
 
     function indexOfInfluence(playerState, role) {
