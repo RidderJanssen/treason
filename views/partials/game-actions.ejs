@@ -3,12 +3,12 @@
     <div data-bind="visible: waitingToPlay">
         <p>Waiting for players</p>
         <p data-bind="visible: !wantToStart()">
-            <button class="btn btn-default" data-bind="enable: canAddAi(), event: {vclick: addAi}">Add AI</button>
-            <button class="btn btn-default" data-bind="enable: canRemoveAi(), event: {vclick: removeAi}">Remove AI</button>
+            <!-- Add AI <button class="btn btn-default" data-bind="enable: canAddAi(), event: {vclick: addAi}">Add AI</button> -->
+            <!-- Remove AI <button class="btn btn-default" data-bind="enable: canRemoveAi(), event: {vclick: removeAi}">Remove AI</button> -->
             <br/>
-            <button class="btn btn-default" data-bind="event: {vclick: start.bind(null, 'original')}, enable: canStartGame">Start normal game</button>
-            <button class="btn btn-default" data-bind="event: {vclick: start.bind(null, 'inquisitors')}, enable: canStartGame">Start inquisitor game</button>
-            <button class="btn btn-default" data-bind="event: {vclick: start.bind(null, 'reformation')}, enable: canStartGame">Start reformation game</button>
+            <button class="btn btn-default" data-bind="event: {vclick: start.bind(null, 'original')}, enable: canStartGame">Start Game</button>
+            <!-- Start Inquisitor Game <button class="btn btn-default" data-bind="event: {vclick: start.bind(null, 'inquisitors')}, enable: canStartGame">Start inquisitor game</button> -->
+            <!-- Start Reformation Game <button class="btn btn-default" data-bind="event: {vclick: start.bind(null, 'reformation')}, enable: canStartGame">Start reformation game</button> -->
         </p>
         <p data-bind="visible: wantToStart()">
             Not all players are ready. Start without them?<br/>
