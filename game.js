@@ -31,8 +31,8 @@ var nextGameId = 1;
 
 var MIN_PLAYERS = 2;
 var MAX_PLAYERS = 10;
-var INITIAL_CASH = 2;
-var INFLUENCES = 2;
+var INITIAL_CASH = 0;
+var INFLUENCES = 0;
 
 var epithets = fs.readFileSync(__dirname + '/epithets.txt', 'utf8').split(/\r?\n/);
 
@@ -495,8 +495,8 @@ module.exports = function createGame(options) {
             throw new GameException('Not enough players are ready to play');
         }
         gameStats = dataAccess.constructGameStats();
-        state.gameType = gameType || 'original';
-        gameStats.gameType = gameType || 'original';
+        state.gameType = 'original' // state.gameType = gameType || 'original';
+        gameStats.gameType = 'original' // gameStats.gameType = gameType || 'original';
         state.roles = ['duke', 'captain', 'assassin', 'contessa'];
         if (gameStats.gameType === 'inquisitors' || gameStats.gameType == 'reformation') {
             state.roles.push('inquisitor');
@@ -576,9 +576,9 @@ module.exports = function createGame(options) {
         else {
             firstPlayer = nonObservers[rand(nonObservers.length)];
         }
-        if (nonObservers.length === 2) {
-            state.players[firstPlayer].cash--;
-        }
+        // if (nonObservers.length === 2) {
+        //     state.players[firstPlayer].cash--;
+        // }
         turnHistGroup++;
         setState({
             name: stateNames.START_OF_TURN,
