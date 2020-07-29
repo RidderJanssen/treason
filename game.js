@@ -494,13 +494,13 @@ module.exports = function createGame(options) {
         gameStats = dataAccess.constructGameStats();
         state.gameType = gameType || 'original';
         gameStats.gameType = gameType || 'original';
-        // state.roles = ['duke', 'captain', 'assassin', 'contessa'];
-        // if (gameStats.gameType === 'inquisitors' || gameStats.gameType == 'reformation') {
-        //     state.roles.push('inquisitor');
-        // }
-        // else {
-        //     state.roles.push('ambassador');
-        // }
+        state.roles = ['duke', 'captain', 'assassin', 'contessa'];
+        if (gameStats.gameType === 'inquisitors' || gameStats.gameType == 'reformation') {
+            state.roles.push('inquisitor');
+        }
+        else {
+            state.roles.push('ambassador');
+        }
 
         let nonObservers = [];
 
@@ -543,11 +543,10 @@ module.exports = function createGame(options) {
         for (let i of nonObservers) {
             const playerState = state.players[i];
             for (let j = 0; j < INFLUENCES; j++) {
-                playerState.influence[j] = {} 
-                // = {
-                //     role: deck.pop(),
-                //     revealed: false
-                // };
+                playerState.influence[j] = {
+                    role: deck.pop(),
+                    revealed: false
+                };
             }
             playerState.influenceCount = INFLUENCES;
             playerState.cash = INITIAL_CASH;
@@ -557,15 +556,15 @@ module.exports = function createGame(options) {
                 gameStats.humanPlayers++;
             }
 
-            // if (gameStats.gameType == 'reformation') {
-            //     playerState.team = nextTeam;
-            //     nextTeam *= -1;
-            // }
+            if (gameStats.gameType == 'reformation') {
+                playerState.team = nextTeam;
+                nextTeam *= -1;
+            }
         }
 
-        // if (gameStats.gameType == 'reformation') {
-        //     state.freeForAll = false;
-        // }
+        if (gameStats.gameType == 'reformation') {
+            state.freeForAll = false;
+        }
 
         let firstPlayer;
         if (typeof options.firstPlayer === 'number') {
@@ -1352,12 +1351,11 @@ module.exports = function createGame(options) {
         return shuffled;
     }
 
-    function buildDeck() { // This one is useful
+    function buildDeck() {
         var deck = [];
-        // for (var i = 0; i < state.numRoles; i++) {
-        //     deck = deck.concat(state.roles);
-        // }
-        deck = ["Sinterklaas", "Donald Duck", "Mickey Mouse", "Donald Trump", "Barack Obama", "Santa Claus", "Easter Bunny", "Pete Hoekstra", "Somebody I Used To Know"]
+        for (var i = 0; i < state.numRoles; i++) {
+            deck = deck.concat(state.roles);
+        }
         return shuffle(deck);
     }
 
