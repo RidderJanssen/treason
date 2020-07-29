@@ -1199,6 +1199,12 @@ module.exports = function createGame(options) {
         var target, message, revealedRole;
         var playerState = state.players[playerIdx];
         var action = actions[actionState.action];
+
+        // If the deck is empty, stop the game
+        if (deck.length == 0) {
+            return true;
+        }
+
         playerState.cash += action.gain || 0;
         if ((actionState.action == 'draw') || (actionState.action == 'skip')) {
             if (actionState.action == 'skip') {
