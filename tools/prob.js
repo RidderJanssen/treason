@@ -10,9 +10,11 @@ function shuffle(array) {
 
 function buildDeck() {
     var deck = [];
+    /* original code
     for (var i = 0; i < 3; i++) {
         deck = deck.concat(['duke', 'captain', 'ambassador', 'assassin', 'contessa']);
-    }
+    } */
+    deck = ["Sinterklaas", "Kerstman", "Pete Hoekstra", "Donald Trump", "Donald Duck", "Donald Duck"] // my code
     return shuffle(deck);
 }
 
