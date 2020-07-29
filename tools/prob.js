@@ -18,6 +18,8 @@ function buildDeck() {
     return shuffle(deck);
 }
 
+// I think the next bit isn't important so I comment it away
+/*
 var counts = [];
 var totals = [];
 var players = 4;
@@ -40,17 +42,22 @@ for (var i = 0; i < 100000; i++) {
             counts[0]++;
         }
     }
+*/
 
+    //this bit was already commented out
 /*    for (var p = 1; p < players; p++) {
         if (cards[p][0] == 'duke' && cards[p][1] == 'duke') {
             counts[p]++;
         }
     }
 */
-}
+//}
+
+/*
 console.log(counts); // 37%
 console.log(totals);
 console.log(counts[0] / totals[0]);
+*/
 
 // In 100 games, 36 games I have duke, 64 games I do not
 // In the 36, I play duke in all of them
