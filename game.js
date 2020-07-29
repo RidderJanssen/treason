@@ -721,7 +721,7 @@ module.exports = function createGame(options) {
             playerState.cash -= action.cost;
             if (action.roles == null && action.blockedBy == null) {
                 if (playAction(playerIdx, command, false)) {
-                    if (command.action !== "draw") {
+                    if (command.action == "time") {
                         nextTurn();
                     }
                 }
