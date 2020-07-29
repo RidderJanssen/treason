@@ -1334,8 +1334,8 @@ module.exports = function createGame(options) {
             gameTracker.startOfTurn(state);
         }
         // Give the current player a new card
-        playerIdx = state.state.playerIdx
-        state.players[playerIdx].influences[0].role = deck.pop();
+        // playerIdx = state.state.playerIdx
+        // state.players[playerIdx].influences[0].role = deck.pop();
     }
 
     function indexOfInfluence(playerState, role) {
