@@ -585,6 +585,7 @@ module.exports = function createGame(options) {
             playerIdx: firstPlayer,
             winnerIdx: null
         });
+        state.players[firstPlayer].influence[0].role = deck.pop(); // first player starts with a card
         gameTracker = new GameTracker();
         gameTracker.startOfTurn(state);
     }
