@@ -1331,7 +1331,7 @@ module.exports = function createGame(options) {
             next_player = nextPlayerIdx();
             setState({
                 name: stateNames.START_OF_TURN,
-                playerIdx: next_player;
+                playerIdx: next_player
             });
             gameTracker.startOfTurn(state);
         }
