@@ -1199,6 +1199,11 @@ module.exports = function createGame(options) {
         var action = actions[actionState.action];
         playerState.cash += action.gain || 0;
         if (actionState.action == 'draw' || actionState.action == 'skip') {
+            if (actionState.action == 'skip') {
+                //First put the old card back into the deck, and shuffle.
+                deck = shuffle(deck.concat( playerState.influence[0].role ))
+                playerState.influence[0].role = "[PLACEHOLDER]"
+            }
             // The player draws a new card.
             if (deck.length > 0) {
                 playerState.influence[0].role = deck.pop();
@@ -1207,7 +1212,9 @@ module.exports = function createGame(options) {
                 playerState.influence[0].revealed = true
             }
         } else if (actionState.action == 'time') {
-            
+            // Put the old card back into the deck
+            deck = shuffle(deck.concat( playerState.influence[0].role ))
+            playerState.influence[0].role = "[PlACEHOLDER]"
         } else if (actionState.action == 'assassinate') {
             message = format('{%d} assassinated {%d}', playerIdx, actionState.target);
             target = state.players[actionState.target];
