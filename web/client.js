@@ -894,6 +894,7 @@ function actionNames() {
     // ];
     return [
         'draw',
+        'skip',
         'time'
     ];
 }

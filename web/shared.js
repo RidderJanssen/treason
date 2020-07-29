@@ -5,6 +5,9 @@
         'draw': {
             cost: 0
         },
+        'skip': {
+            cost: 0
+        },
         'time': {
             cost: 0
         }
