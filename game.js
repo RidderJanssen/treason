@@ -1198,15 +1198,14 @@ module.exports = function createGame(options) {
         var playerState = state.players[playerIdx];
         var action = actions[actionState.action];
         playerState.cash += action.gain || 0;
-        if (actionState.action == 'draw') {
+        if (actionState.action == 'draw' || actionState.action == 'skip') {
+            // The player draws a new card.
             if (deck.length > 0) {
                 playerState.influence[0].role = deck.pop();
             } else {
                 playerState.influence[0].role = "[EMPTY]"
                 playerState.influence[0].revealed = true
             }
-        } else if (actionState.action == 'skip') {
-
         } else if (actionState.action == 'time') {
             
         } else if (actionState.action == 'assassinate') {
@@ -1316,13 +1315,20 @@ module.exports = function createGame(options) {
     }
 
     function nextTurn() {
+        // hi
         debug('next turn');
         if (state.state.name != stateNames.WAITING_FOR_PLAYERS) {
             turnHistGroup++;
+            next_player = nextPlayerIdx()
             setState({
                 name: stateNames.START_OF_TURN,
-                playerIdx: nextPlayerIdx()
+                playerIdx: next_player
             });
+            if (deck.length > 0) {
+                state.players[next_player].influence[0].role = deck.pop(); // Give new card
+            } else {
+                state.players[next_player].influence[0].role = "[EMPTY]";
+            }
             gameTracker.startOfTurn(state);
         }
     }
