@@ -49,6 +49,7 @@ const actionMessages = {
 
 module.exports = function createGame(options) {
     options = options || {};
+    options.debug = true
     var gameId = nextGameId++;
     var dataAccess = options.dataAccess;
 
@@ -1199,7 +1200,7 @@ module.exports = function createGame(options) {
         var playerState = state.players[playerIdx];
         var action = actions[actionState.action];
         playerState.cash += action.gain || 0;
-        if (actionState.action == 'draw' || actionState.action == 'skip') {
+        if ((actionState.action == 'draw') || (actionState.action == 'skip')) {
             if (actionState.action == 'skip') {
                 //First put the old card back into the deck, and shuffle.
                 deck = shuffle(deck.concat( playerState.influence[0].role ))
