@@ -3,7 +3,8 @@
 
     var actions = {
         'draw': {
-            cost: 0
+            cost: 0,
+            gain: 1
         },
         'skip': {
             cost: 0
