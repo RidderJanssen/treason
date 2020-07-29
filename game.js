@@ -551,7 +551,7 @@ module.exports = function createGame(options) {
                     revealed: false
                 };
             }
-            playerState.influenceCount = INFLUENCES;
+            playerState.influenceCount = 1; // This is dangerous
             playerState.cash = INITIAL_CASH;
 
             gameStats.players++;
