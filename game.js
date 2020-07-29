@@ -718,7 +718,9 @@ module.exports = function createGame(options) {
             playerState.cash -= action.cost;
             if (action.roles == null && action.blockedBy == null) {
                 if (playAction(playerIdx, command, false)) {
-                    nextTurn();
+                    if (command !== 'draw') {
+                        nextTurn();
+                    }
                 }
             } else {
                 debug('checking for blocks/challenges');
