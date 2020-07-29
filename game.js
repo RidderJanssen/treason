@@ -699,9 +699,9 @@ module.exports = function createGame(options) {
                 throw new GameException('Unknown action');
             }
             action = actions[command.action];
-            if (playerState.cash >= 10 && command.action != 'coup') {
-                throw new GameException('You must coup with >= 10 cash');
-            }
+            // if (playerState.cash >= 10 && command.action != 'coup') {
+            //     throw new GameException('You must coup with >= 10 cash');
+            // }
             if (playerState.cash < action.cost) {
                 throw new GameException('Not enough cash');
             }
