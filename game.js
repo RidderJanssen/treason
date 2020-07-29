@@ -1198,12 +1198,7 @@ module.exports = function createGame(options) {
         var playerState = state.players[playerIdx];
         var action = actions[actionState.action];
         playerState.cash += action.gain || 0;
-        if ((actionState.action == 'draw') || (actionState.action == 'skip')) {
-            if (actionState.action == 'skip') {
-                // The old card goes back into the deck.
-                deck += playerState.influence[0].role;
-                deck = shuffle(deck);
-            }
+        if (actionState.action == 'draw' || actionState.action == 'skip') {
             // The player draws a new card.
             if (deck.length > 0) {
                 playerState.influence[0].role = deck.pop();
@@ -1320,20 +1315,13 @@ module.exports = function createGame(options) {
     }
 
     function nextTurn() {
-        // hi
         debug('next turn');
         if (state.state.name != stateNames.WAITING_FOR_PLAYERS) {
             turnHistGroup++;
-            next_player = nextPlayerIdx()
             setState({
                 name: stateNames.START_OF_TURN,
-                playerIdx: next_player
+                playerIdx: nextPlayerIdx()
             });
-            if (deck.length > 0) {
-                state.players[next_player].influence[0].role = deck.pop(); // Give new card
-            } else {
-                state.players[next_player].influence[0].role = "[EMPTY]";
-            }
             gameTracker.startOfTurn(state);
         }
     }
