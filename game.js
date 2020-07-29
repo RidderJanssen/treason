@@ -1217,7 +1217,6 @@ module.exports = function createGame(options) {
                 playerState.influence[0].role = deck.pop();
             } else {
                 playerState.influence[0].role = "[EMPTY]"
-                playerState.influence[0].revealed = true
             }
         } else if (actionState.action == 'time') {
             // Put the old card back into the deck
