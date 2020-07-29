@@ -1199,7 +1199,12 @@ module.exports = function createGame(options) {
         var action = actions[actionState.action];
         playerState.cash += action.gain || 0;
         if (actionState.action == 'draw') {
-            playerState.influence[0].role = deck.pop();
+            if (deck.length > 0) {
+                playerState.influence[0].role = deck.pop();
+            } else {
+                playerState.influence[0].role = "[EMPTY]"
+                playerState.influence[0].revealed = true
+            }
         } else if (actionState.action == 'skip') {
 
         } else if (actionState.action == 'time') {
