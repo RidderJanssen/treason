@@ -1325,17 +1325,18 @@ module.exports = function createGame(options) {
 
     function nextTurn() {
         debug('next turn');
+        var next_player;
         if (state.state.name != stateNames.WAITING_FOR_PLAYERS) {
             turnHistGroup++;
+            next_player = nextPlayerIdx();
             setState({
                 name: stateNames.START_OF_TURN,
-                playerIdx: nextPlayerIdx()
+                playerIdx: next_player;
             });
             gameTracker.startOfTurn(state);
         }
-        // Give the current player a new card
-        debug(state)
-        // state.players[playerIdx].influences[0].role = deck.pop();
+        // Give the next player a new card
+        state.players[next_player].influences[0].role = deck.pop();
     }
 
     function indexOfInfluence(playerState, role) {
