@@ -41,7 +41,10 @@ const actionMessages = {
     'steal': (idx, target) => `{${idx}} attempted to steal from {${target}}`,
     'exchange': (idx) => `{${idx}} attempted to exchange`,
     'interrogate': (idx, target) => `{${idx}} attempted to interrogate {${target}}`,
-    'embezzle': (idx, target, action, state) => `{${idx}} attempted to embezzle $${state.treasuryReserve}`
+    'embezzle': (idx, target, action, state) => `{${idx}} attempted to embezzle $${state.treasuryReserve}`,
+    'draw': (idx) => `{${idx}} drew a card`,
+    'skip': (idx) => `{${idx}} skipped this guess and got a new card`,
+    'time': (idx) => `Time is up! Next player can have a go`
 }
 
 module.exports = function createGame(options) {
@@ -1196,9 +1199,11 @@ module.exports = function createGame(options) {
         var action = actions[actionState.action];
         playerState.cash += action.gain || 0;
         if (actionState.action == 'draw') {
-            console.log("hi mom");
+            
+        } else if (actionState.action == 'skip') {
+
         } else if (actionState.action == 'time') {
-            console.log("hi dad");
+            
         } else if (actionState.action == 'assassinate') {
             message = format('{%d} assassinated {%d}', playerIdx, actionState.target);
             target = state.players[actionState.target];
