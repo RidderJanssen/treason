@@ -1198,7 +1198,12 @@ module.exports = function createGame(options) {
         var playerState = state.players[playerIdx];
         var action = actions[actionState.action];
         playerState.cash += action.gain || 0;
-        if (actionState.action == 'draw' || actionState.action == 'skip') {
+        if ((actionState.action == 'draw') || (actionState.action == 'skip')) {
+            if (actionState.action == 'skip') {
+                // The old card goes back into the deck.
+                deck += playerState.influence[0].role;
+                deck = shuffle(deck);
+            }
             // The player draws a new card.
             if (deck.length > 0) {
                 playerState.influence[0].role = deck.pop();
