@@ -32,7 +32,7 @@ var nextGameId = 1;
 var MIN_PLAYERS = 2;
 var MAX_PLAYERS = 10;
 var INITIAL_CASH = 0;
-var INFLUENCES = 0;
+var INFLUENCES = 1;
 
 var epithets = fs.readFileSync(__dirname + '/epithets.txt', 'utf8').split(/\r?\n/);
 
@@ -547,7 +547,7 @@ module.exports = function createGame(options) {
             const playerState = state.players[i];
             for (let j = 0; j < INFLUENCES; j++) {
                 playerState.influence[j] = {
-                    role: deck.pop(),
+                    role: "[PLACEHOLDER]", //deck.pop(),
                     revealed: false
                 };
             }
@@ -1199,7 +1199,7 @@ module.exports = function createGame(options) {
         var action = actions[actionState.action];
         playerState.cash += action.gain || 0;
         if (actionState.action == 'draw') {
-            
+            playerState.influence[0].role = deck.pop();
         } else if (actionState.action == 'skip') {
 
         } else if (actionState.action == 'time') {
