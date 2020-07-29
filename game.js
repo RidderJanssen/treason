@@ -1200,8 +1200,8 @@ module.exports = function createGame(options) {
         var playerState = state.players[playerIdx];
         var action = actions[actionState.action];
 
-        // If the deck is empty, stop the game
-        if (deck.length == 0) {
+        // If the HAND is empty, stop the game
+        if (playerState.influence[0].role == "[EMPTY]") {
             return true;
         }
 
