@@ -1353,9 +1353,10 @@ module.exports = function createGame(options) {
 
     function buildDeck() {
         var deck = [];
-        for (var i = 0; i < state.numRoles; i++) {
-            deck = deck.concat(state.roles);
-        }
+        // for (var i = 0; i < state.numRoles; i++) {
+        //     deck = deck.concat(state.roles);
+        // }
+        deck = ["Donald Duck", "Mickey Mouse", "Somebody that I Used to Know", "Donald Trump", "Barack Obama", "George Bush", "Pete Hoekstra"]
         return shuffle(deck);
     }
 
