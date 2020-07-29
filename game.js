@@ -1218,7 +1218,7 @@ module.exports = function createGame(options) {
             deck = shuffle(deck.concat( playerState.influence[0].role ))
             playerState.influence[0].role = "[PlACEHOLDER]"
             // give the next player a new card
-            NextPlayerIdx = nextPlayerIdx();
+            var NextPlayerIdx = nextPlayerIdx();
             state.players[NextPlayerIdx].influence[0].role = deck.pop();
         } else if (actionState.action == 'assassinate') {
             message = format('{%d} assassinated {%d}', playerIdx, actionState.target);
