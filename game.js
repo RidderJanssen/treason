@@ -1193,7 +1193,11 @@ module.exports = function createGame(options) {
         var playerState = state.players[playerIdx];
         var action = actions[actionState.action];
         playerState.cash += action.gain || 0;
-        if (actionState.action == 'assassinate') {
+        if (actionState.action == 'draw') {
+            console.log("hi mom");
+        } else if (actionState.action == 'time') {
+            console.log("hi dad");
+        } else if (actionState.action == 'assassinate') {
             message = format('{%d} assassinated {%d}', playerIdx, actionState.target);
             target = state.players[actionState.target];
             if (target.influenceCount == 1) {

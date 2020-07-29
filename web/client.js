@@ -488,6 +488,7 @@ function playerName(playerIdx) {
     return '';
 }
 function actionPresentInGame(actionName) {
+    return true;
     var action = actions[actionName];
     if (action == null) {
         return false;
@@ -501,6 +502,7 @@ function actionPresentInGame(actionName) {
     return true;
 }
 function canPlayAction(actionName) {
+    return true
     var action = actions[actionName];
     var player = ourPlayer();
     if (!player) {
@@ -877,18 +879,22 @@ function historyBorderClass(items) {
 }
 function actionNames() {
     // This is the order I want them to appear in the UI.
+    // return [
+    //     'tax',
+    //     'steal',
+    //     'assassinate',
+    //     'interrogate',
+    //     'exchange',
+    //     'income',
+    //     'foreign-aid',
+    //     'coup',
+    //     'change-team',
+    //     'convert',
+    //     'embezzle'
+    // ];
     return [
-        'tax',
-        'steal',
-        'assassinate',
-        'interrogate',
-        'exchange',
-        'income',
-        'foreign-aid',
-        'coup',
-        'change-team',
-        'convert',
-        'embezzle'
+        'draw',
+        'time'
     ];
 }
 // Exchange action requires inquisitor or ambassador - return whichever one is in the current game type.

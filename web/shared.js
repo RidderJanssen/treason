@@ -2,59 +2,65 @@
     'use strict';
 
     var actions = {
-        'coup': {
-            cost: 7,
-            targeted: true
+        'draw': {
+            cost: 0
         },
-        'income': {
-            cost: 0,
-            gain: 1
-        },
-        'foreign-aid': {
-            cost: 0,
-            gain: 2,
-            blockedBy: ['duke']
-        },
-        'tax': {
-            cost: 0,
-            gain: 3,
-            roles: 'duke'
-        },
-        'assassinate': {
-            cost: 3,
-            roles: 'assassin',
-            targeted: true,
-            blockedBy: ['contessa']
-        },
-        'steal': {
-            cost: 0,
-            roles: 'captain',
-            targeted: true,
-            blockedBy: ['captain', 'ambassador', 'inquisitor']
-        },
-        'exchange': {
-            cost: 0,
-            roles: ['ambassador', 'inquisitor']
-        },
-        'interrogate': {
-            cost: 0,
-            roles: 'inquisitor',
-            targeted: true
-        },
-        'change-team': {
-            gameType: 'reformation',
-            cost: 1
-        },
-        'convert': {
-            gameType: 'reformation',
-            cost: 2,
-            targeted: true
-        },
-        'embezzle': {
-            gameType: 'reformation',
-            cost: 0,
-            roles: '!duke'
+        'time': {
+            cost: 0
         }
+        // 'coup': {
+        //     cost: 7,
+        //     targeted: true
+        // },
+        // 'income': {
+        //     cost: 0,
+        //     gain: 1
+        // },
+        // 'foreign-aid': {
+        //     cost: 0,
+        //     gain: 2,
+        //     blockedBy: ['duke']
+        // },
+        // 'tax': {
+        //     cost: 0,
+        //     gain: 3,
+        //     roles: 'duke'
+        // },
+        // 'assassinate': {
+        //     cost: 3,
+        //     roles: 'assassin',
+        //     targeted: true,
+        //     blockedBy: ['contessa']
+        // },
+        // 'steal': {
+        //     cost: 0,
+        //     roles: 'captain',
+        //     targeted: true,
+        //     blockedBy: ['captain', 'ambassador', 'inquisitor']
+        // },
+        // 'exchange': {
+        //     cost: 0,
+        //     roles: ['ambassador', 'inquisitor']
+        // },
+        // 'interrogate': {
+        //     cost: 0,
+        //     roles: 'inquisitor',
+        //     targeted: true
+        // },
+        // 'change-team': {
+        //     gameType: 'reformation',
+        //     cost: 1
+        // },
+        // 'convert': {
+        //     gameType: 'reformation',
+        //     cost: 2,
+        //     targeted: true
+        // },
+        // 'embezzle': {
+        //     gameType: 'reformation',
+        //     cost: 0,
+        //     roles: '!duke'
+        // }
     };
 
     var states = {
