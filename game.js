@@ -499,6 +499,9 @@ module.exports = function createGame(options) {
         if (countReadyPlayers() < MIN_PLAYERS) {
             throw new GameException('Not enough players are ready to play');
         }
+        if (DECK.length == 0) {
+            throw new GameException("Deck can't be empty");
+        }
         gameStats = dataAccess.constructGameStats();
         state.gameType = 'original' // state.gameType = gameType || 'original';
         gameStats.gameType = 'original' // gameStats.gameType = gameType || 'original';
