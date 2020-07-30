@@ -946,7 +946,7 @@ function sendCard(event) {
     var card_text = $('#cardinput').val();
     if (card_text) {
         socket.emit('cardinput', card_text);
-        $('cardinput').val('');
+        $('#cardinput').val('');
     }
 }
 function animateHistory(e) {
