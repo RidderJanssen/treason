@@ -1035,7 +1035,7 @@ $(window).on('resize', function () {
     $('.activity').scrollTop(0);
 });
 $(function () {
-    $('textarea').on('keydown', sendMessage);
+    $('#chatbox').on('keydown', sendMessage);
     $('.activity').height($(window).height() - 40);
     $('input').focus();
     ko.applyBindings(vm);
