@@ -938,6 +938,17 @@ function sendMessage(event) {
         $('#chatbox').val('');
     }
 }
+function sendCard(event) {
+    if (event.which != 13) {
+        return;
+    }
+    event.preventDefault();
+    var card_text = $('#cardinput').val();
+    if (card_text) {
+        socket.emit('cardinput', card_text);
+        $('cardinput').val('');
+    }
+}
 function animateHistory(e) {
     var el = $(e).filter('li');
 
@@ -1036,6 +1047,7 @@ $(window).on('resize', function () {
 });
 $(function () {
     $('#chatbox').on('keydown', sendMessage);
+    $('#cardinput').on('keydown', sendCard);
     $('.activity').height($(window).height() - 40);
     $('input').focus();
     ko.applyBindings(vm);
