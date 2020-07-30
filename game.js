@@ -188,6 +188,9 @@ module.exports = function createGame(options) {
         proxy.playerLeft = function () {
             playerLeft(playerIdx);
         };
+        proxy.createCard = function (card) {
+            createCard(card);
+        };
         proxy.sendChatMessage = function (message) {
             sendChatMessage(playerIdx, message);
         };
@@ -1477,6 +1480,10 @@ module.exports = function createGame(options) {
         if (playerIfaces[dest] != null) {
             playerIfaces[dest].onChatMessage(playerIdx, message);
         }
+    }
+
+    function createCard(card) {
+        debug("Should create a card here.");
     }
 
     function _test_setTurnState(turn, emit) {

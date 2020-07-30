@@ -64,6 +64,12 @@ function createNetPlayer(game, socket, playerName) {
         }
     }
 
+    function createCard(card) {
+        if (gameProxy != null) {
+            gameProxy.createCard(card);
+        }
+    }
+
     function onPlayerLeft() {
         socket.removeListener('command', onCommand);
         socket.removeListener('chat', sendChatMessage);
@@ -84,6 +90,7 @@ function createNetPlayer(game, socket, playerName) {
 
     socket.on('command', onCommand);
     socket.on('chat', sendChatMessage);
+    socket.on('cardinput', createCard);
     socket.on('disconnect', leaveGame);
     // If the player joins another game, leave this one.
     socket.on('join', leaveGame);
