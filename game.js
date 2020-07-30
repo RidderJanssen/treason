@@ -85,6 +85,7 @@ module.exports = function createGame(options) {
     var adhocHistGroup = 1;
 
     var deck;
+    var DECK = [];
     var _test_fixedDeck = false;
 
     var game = new EventEmitter();
@@ -1387,11 +1388,11 @@ module.exports = function createGame(options) {
     }
 
     function buildDeck() {
-        var deck = [];
+        var deck = DECK;
         // for (var i = 0; i < state.numRoles; i++) {
         //     deck = deck.concat(state.roles);
         // }
-        deck = ["Donald Duck", "Mickey Mouse", "Somebody that I Used to Know", "Donald Trump", "Barack Obama", "George Bush", "Pete Hoekstra"]
+        // deck = ["Donald Duck", "Mickey Mouse", "Somebody that I Used to Know", "Donald Trump", "Barack Obama", "George Bush", "Pete Hoekstra"]
         return shuffle(deck);
     }
 
@@ -1483,7 +1484,7 @@ module.exports = function createGame(options) {
     }
 
     function createCard(card) {
-        debug("Should create a card here.");
+        DECK.push(card);
     }
 
     function _test_setTurnState(turn, emit) {
