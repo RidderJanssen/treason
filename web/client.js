@@ -932,10 +932,11 @@ function sendMessage(event) {
         return;
     }
     event.preventDefault();
-    var message = $('textarea').val();
+    var message = $('#chatbox').val();
+    debug("Sending message: " + message)
     if (message) {
         socket.emit('chat', message);
-        $('textarea').val('');
+        $('#chatbox').val('');
     }
 }
 function animateHistory(e) {
