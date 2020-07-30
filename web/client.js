@@ -933,7 +933,6 @@ function sendMessage(event) {
     }
     event.preventDefault();
     var message = $('#chatbox').val();
-    debug("Sending message: " + message)
     if (message) {
         socket.emit('chat', message);
         $('#chatbox').val('');
