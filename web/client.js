@@ -255,7 +255,8 @@ socket.on('history', function (data) {
     var items;
     // Collect related history items together (but don't bother searching too far back).
     for (var i = 0; i < 10 && i < vm.history().length; i++) {
-        if (vm.history()[i]()[0].histGroup == data.histGroup) {
+        // if (vm.history()[i]()[0].histGroup == data.histGroup) {
+        if (false) {
             items = vm.history()[i];
             break;
         }
