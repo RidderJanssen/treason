@@ -1219,7 +1219,7 @@ module.exports = function createGame(options) {
                 deck = shuffle(deck.concat( playerState.influence[0].role ))
                 playerState.influence[0].role = "[PLACEHOLDER]"
             } else {
-                addHistory('block', nextAdhocHistGroup(), 'The card was guessed and {%d} drew a new card', playerIdx);
+                addHistory('draw', nextAdhocHistGroup(), 'The card was guessed and {%d} drew a new card', playerIdx);
             }
             // The player draws a new card.
             if (deck.length > 0) {
