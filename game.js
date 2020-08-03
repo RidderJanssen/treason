@@ -1218,7 +1218,8 @@ module.exports = function createGame(options) {
                 //First put the old card back into the deck, and shuffle.
                 deck = shuffle(deck.concat( playerState.influence[0].role ))
                 playerState.influence[0].role = "[PLACEHOLDER]"
-                addHistory('draw', nextAdhocHistGroup(), 'The card was guessed and {%d} drew a new card', playerIdx);
+            } else {
+                addHistory('block', nextAdhocHistGroup(), 'The card was guessed and {%d} drew a new card', playerIdx);
             }
             // The player draws a new card.
             if (deck.length > 0) {
