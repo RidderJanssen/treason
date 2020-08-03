@@ -86,6 +86,8 @@ module.exports = function createGame(options) {
 
     var deck;
     var DECK = [];
+    var PLACEHOLDER = "[PLACEHOLDER]"
+    var EMPTY = "[EMPTY]"
     var _test_fixedDeck = false;
 
     var game = new EventEmitter();
@@ -369,8 +371,8 @@ module.exports = function createGame(options) {
         debug('Checking for Game End');
         var ended = true;
         for (var i = 0; i < state.players.length; i++) {
-            if (state.players[i].influence[0].role != '[EMPTY]') {
-                if (state.players[i].influence[0].role != '[PLACEHOLDER]') {
+            if (state.players[i].influence[0].role != EMPTY) {
+                if (state.players[i].influence[0].role != PLACEHOLDER) {
                     ended = false;
                 }
             }
@@ -578,7 +580,7 @@ module.exports = function createGame(options) {
             const playerState = state.players[i];
             for (let j = 0; j < INFLUENCES; j++) {
                 playerState.influence[j] = {
-                    role: "[PLACEHOLDER]", //deck.pop(),
+                    role: PLACEHOLDER, //deck.pop(),
                     revealed: false
                 };
             }
@@ -1231,7 +1233,7 @@ module.exports = function createGame(options) {
         var action = actions[actionState.action];
 
         // If the HAND is empty, stop the game
-        if (playerState.influence[0].role == "[EMPTY]") {
+        if (playerState.influence[0].role == EMPTY) {
             addHistory('time', curTurnHistGroup(), 'The deck is empty!');
             checkForGameEnd();
             return true;
@@ -1243,7 +1245,7 @@ module.exports = function createGame(options) {
             if (actionState.action == 'skip') {
                 //First put the old card back into the deck, and shuffle.
                 deck = shuffle(deck.concat( playerState.influence[0].role ))
-                playerState.influence[0].role = "[PLACEHOLDER]"
+                playerState.influence[0].role = PLACEHOLDER
                 message += "The card was skipped"
             } else {
                 // actionState.action == 'draw'
@@ -1254,7 +1256,7 @@ module.exports = function createGame(options) {
                 playerState.influence[0].role = deck.pop();
                 message += " ; {%d} drew a new card";
             } else {
-                playerState.influence[0].role = "[EMPTY]";
+                playerState.influence[0].role = EMPTY;
                 message += " ; {%d} can't draw another card because the deck is empty.";
             }
             addHistory(actionState.action, curTurnHistGroup(), message, playerIdx);
@@ -1262,10 +1264,10 @@ module.exports = function createGame(options) {
         } else if (actionState.action == 'time') {
             // Put the old card back into the deck
             deck = shuffle(deck.concat( playerState.influence[0].role ))
-            playerState.influence[0].role = "[PlACEHOLDER]"
+            playerState.influence[0].role = PLACEHOLDER
             // give the next player a new card
             var NextPlayerIdx = nextPlayerIdx();
-            state.players[NextPlayerIdx].influence[0].role = (deck.pop() || "[EMPTY]");
+            state.players[NextPlayerIdx].influence[0].role = (deck.pop() || EMPTY);
             addHistory('time', curTurnHistGroup(), 'Time is up! Next player can have a go');
         } else if (actionState.action == 'assassinate') {
             message = format('{%d} assassinated {%d}', playerIdx, actionState.target);
@@ -1432,6 +1434,10 @@ module.exports = function createGame(options) {
         // }
         // deck = ["Donald Duck", "Mickey Mouse", "Somebody that I Used to Know", "Donald Trump", "Barack Obama", "George Bush", "Pete Hoekstra"]
         return shuffle(deck);
+    }
+
+    function destroyDeck() {
+        DECK = [];
     }
 
     function addHistory(/*type, histGroup, format_string, format_args...*/) {
