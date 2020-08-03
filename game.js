@@ -190,7 +190,7 @@ module.exports = function createGame(options) {
             playerLeft(playerIdx);
         };
         proxy.createCard = function (card) {
-            createCard(card);
+            createCard(playerIdx, card);
         };
         proxy.sendChatMessage = function (message) {
             sendChatMessage(playerIdx, message);
@@ -1496,8 +1496,9 @@ module.exports = function createGame(options) {
         }
     }
 
-    function createCard(card) {
+    function createCard(playerIdx, card) {
         DECK.push(card);
+        addHistory('cardinput', curTurnHistGroup(), "{%d} added another card to the deck", playerIdx)
     }
 
     function _test_setTurnState(turn, emit) {
