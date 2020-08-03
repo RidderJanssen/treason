@@ -1213,20 +1213,26 @@ module.exports = function createGame(options) {
         }
 
         playerState.cash += action.gain || 0;
+        message = ""
         if ((actionState.action == 'draw') || (actionState.action == 'skip')) {
             if (actionState.action == 'skip') {
                 //First put the old card back into the deck, and shuffle.
                 deck = shuffle(deck.concat( playerState.influence[0].role ))
                 playerState.influence[0].role = "[PLACEHOLDER]"
+                message += "The card was skipped"
             } else {
-                addHistory('draw', nextAdhocHistGroup(), 'The card was guessed and {%d} drew a new card', playerIdx);
+                // actionState.action == 'draw'
+                message += "The card was guessed"
             }
             // The player draws a new card.
             if (deck.length > 0) {
                 playerState.influence[0].role = deck.pop();
+                message += " ; {%d} drew a new card"
             } else {
                 playerState.influence[0].role = "[EMPTY]"
+                message += " ; the deck is empty now"
             }
+            addHistory(actionState.action, curTurnHistGroup(), message, playerIdx);
         } else if (actionState.action == 'time') {
             // Put the old card back into the deck
             deck = shuffle(deck.concat( playerState.influence[0].role ))
