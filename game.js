@@ -1239,7 +1239,7 @@ module.exports = function createGame(options) {
             playerState.influence[0].role = "[PlACEHOLDER]"
             // give the next player a new card
             var NextPlayerIdx = nextPlayerIdx();
-            state.players[NextPlayerIdx].influence[0].role = deck.pop();
+            state.players[NextPlayerIdx].influence[0].role = deck.pop() || "[EMPTY]";
             addHistory('time', curTurnHistGroup(), 'Time is up! Next player can have a go');
         } else if (actionState.action == 'assassinate') {
             message = format('{%d} assassinated {%d}', playerIdx, actionState.target);
