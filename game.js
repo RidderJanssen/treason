@@ -368,8 +368,8 @@ module.exports = function createGame(options) {
     function checkForGameEnd() {
         var ended = true;
         for (var i = 0; i < state.players.length; i++) {
-            if (state.players[i].influences[0] != '[EMPTY]') {
-                if (state.players[i].influences[0] != '[PLACEHOLDER]') {
+            if (state.players[i].influence[0] != '[EMPTY]') {
+                if (state.players[i].influence[0] != '[PLACEHOLDER]') {
                     ended = false;
                 }
             }
