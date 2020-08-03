@@ -366,39 +366,59 @@ module.exports = function createGame(options) {
     }
 
     function checkForGameEnd() {
-        var winnerIdx = null;
+        var ended = true;
         for (var i = 0; i < state.players.length; i++) {
-            if (state.players[i].influenceCount > 0) {
-                if (winnerIdx == null) {
-                    winnerIdx = i;
-                } else {
-                    winnerIdx = null;
-                    break;
+            if (state.players[i].influences[0] != '[EMPTY]') {
+                if (state.players[i].influences[0] != '[PLACEHOLDER]') {
+                    ended = false;
                 }
             }
         }
-        if (winnerIdx != null) {
-            for (var i = 0; i < state.players.length; i++) {
-                state.players[i].team = 0;
-            }
+        if (ended) {
             setState({
                 name: stateNames.WAITING_FOR_PLAYERS,
-                winnerIdx: winnerIdx,
+                winnerIdx: null,
                 playerIdx: null
             });
             gameTracker.gameOver(state);
             resetReadyStates();
-            var winnerIface = playerIfaces[winnerIdx];
-            if (winnerIface) {
-                gameStats.playerRank.unshift(winnerIface.playerId);
-            }
-            gameStats.events = gameTracker.pack().toString('base64');
-            dataAccess.recordGameData(gameStats);
             game.emit('end');
             return true;
-        } else {
-            return false;
         }
+        return false;
+        // var winnerIdx = null;
+        // for (var i = 0; i < state.players.length; i++) {
+        //     if (state.players[i].influenceCount > 0) {
+        //         if (winnerIdx == null) {
+        //             winnerIdx = i;
+        //         } else {
+        //             winnerIdx = null;
+        //             break;
+        //         }
+        //     }
+        // }
+        // if (winnerIdx != null) {
+        //     for (var i = 0; i < state.players.length; i++) {
+        //         state.players[i].team = 0;
+        //     }
+        //     setState({
+        //         name: stateNames.WAITING_FOR_PLAYERS,
+        //         winnerIdx: winnerIdx,
+        //         playerIdx: null
+        //     });
+        //     gameTracker.gameOver(state);
+        //     resetReadyStates();
+        //     var winnerIface = playerIfaces[winnerIdx];
+        //     if (winnerIface) {
+        //         gameStats.playerRank.unshift(winnerIface.playerId);
+        //     }
+        //     gameStats.events = gameTracker.pack().toString('base64');
+        //     dataAccess.recordGameData(gameStats);
+        //     game.emit('end');
+        //     return true;
+        // } else {
+        //     return false;
+        // }
     }
 
     function checkFreeForAll() {
