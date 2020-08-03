@@ -1227,10 +1227,10 @@ module.exports = function createGame(options) {
             // The player draws a new card.
             if (deck.length > 0) {
                 playerState.influence[0].role = deck.pop();
-                message += " ; {%d} drew a new card"
+                message += " ; {%d} drew a new card";
             } else {
-                playerState.influence[0].role = "[EMPTY]"
-                message += " ; the deck is empty now"
+                playerState.influence[0].role = "[EMPTY]";
+                message += " ; {%d} can't draw another card because the deck is empty.";
             }
             addHistory(actionState.action, curTurnHistGroup(), message, playerIdx);
         } else if (actionState.action == 'time') {
