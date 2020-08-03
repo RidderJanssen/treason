@@ -366,6 +366,7 @@ module.exports = function createGame(options) {
     }
 
     function checkForGameEnd() {
+        debug('Checking for Game End');
         var ended = true;
         for (var i = 0; i < state.players.length; i++) {
             if (state.players[i].influence[0] != '[EMPTY]') {
@@ -375,6 +376,7 @@ module.exports = function createGame(options) {
             }
         }
         if (ended) {
+            debug('Game has ended');
             setState({
                 name: stateNames.WAITING_FOR_PLAYERS,
                 winnerIdx: null,
