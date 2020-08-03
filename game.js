@@ -1240,6 +1240,7 @@ module.exports = function createGame(options) {
             // give the next player a new card
             var NextPlayerIdx = nextPlayerIdx();
             state.players[NextPlayerIdx].influence[0].role = deck.pop();
+            addHistory('time', curTurnHistGroup(), 'Time is up! Next player can have a go');
         } else if (actionState.action == 'assassinate') {
             message = format('{%d} assassinated {%d}', playerIdx, actionState.target);
             target = state.players[actionState.target];
