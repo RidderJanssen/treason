@@ -1231,6 +1231,7 @@ module.exports = function createGame(options) {
         // If the HAND is empty, stop the game
         if (playerState.influence[0].role == "[EMPTY]") {
             addHistory('time', curTurnHistGroup(), 'The deck is empty!');
+            checkForGameEnd();
             return true;
         }
 
@@ -1255,13 +1256,14 @@ module.exports = function createGame(options) {
                 message += " ; {%d} can't draw another card because the deck is empty.";
             }
             addHistory(actionState.action, curTurnHistGroup(), message, playerIdx);
+            checkForGameEnd();
         } else if (actionState.action == 'time') {
             // Put the old card back into the deck
             deck = shuffle(deck.concat( playerState.influence[0].role ))
             playerState.influence[0].role = "[PlACEHOLDER]"
             // give the next player a new card
             var NextPlayerIdx = nextPlayerIdx();
-            state.players[NextPlayerIdx].influence[0].role = deck.pop() || "[EMPTY]";
+            state.players[NextPlayerIdx].influence[0].role = (deck.pop() || "[EMPTY]");
             addHistory('time', curTurnHistGroup(), 'Time is up! Next player can have a go');
         } else if (actionState.action == 'assassinate') {
             message = format('{%d} assassinated {%d}', playerIdx, actionState.target);
