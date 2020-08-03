@@ -1498,7 +1498,7 @@ module.exports = function createGame(options) {
 
     function createCard(playerIdx, card) {
         DECK.push(card);
-        addHistory('cardinput', curTurnHistGroup(), "{%d} added another card to the deck", playerIdx)
+        addHistory('cardinput', curTurnHistGroup(), "{%d} added a card to the deck", playerIdx)
     }
 
     function _test_setTurnState(turn, emit) {
