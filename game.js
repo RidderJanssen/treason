@@ -500,6 +500,7 @@ module.exports = function createGame(options) {
             throw new GameException('Not enough players are ready to play');
         }
         if (DECK.length == 0) {
+            addHistory('emptydeck', curTurnHistGroup(), "Can't start the game: the deck is empty!")
             throw new GameException("Deck can't be empty");
         }
         gameStats = dataAccess.constructGameStats();
