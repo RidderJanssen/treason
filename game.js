@@ -1426,7 +1426,7 @@ module.exports = function createGame(options) {
     }
 
     function buildDeck() {
-        var deck = DECK;
+        var deck = DECK.slice();
         // for (var i = 0; i < state.numRoles; i++) {
         //     deck = deck.concat(state.roles);
         // }
