@@ -49,7 +49,7 @@ const actionMessages = {
 
 module.exports = function createGame(options) {
     options = options || {};
-    options.debug = true
+    // options.debug = true
     var gameId = nextGameId++;
     var dataAccess = options.dataAccess;
 
