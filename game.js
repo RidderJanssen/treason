@@ -1209,6 +1209,7 @@ module.exports = function createGame(options) {
 
         // If the HAND is empty, stop the game
         if (playerState.influence[0].role == "[EMPTY]") {
+            addHistory('time', curTurnHistGroup(), 'The deck is empty!');
             return true;
         }
 
