@@ -894,9 +894,9 @@ function actionNames() {
     //     'embezzle'
     // ];
     return [
-        'draw',
+        'point',
         'skip',
-        'time'
+        'time up'
     ];
 }
 // Exchange action requires inquisitor or ambassador - return whichever one is in the current game type.
