@@ -1249,7 +1249,7 @@ module.exports = function createGame(options) {
                 message += "The card was skipped"
             } else {
                 // actionState.action == 'point'
-                message += "The card was guessed"
+                message += "The card `<span class='go_hide'>{}</span>` was guessed".format( playerState.influence[0].role )
             }
             // The player draws a new card.
             if (deck.length > 0) {

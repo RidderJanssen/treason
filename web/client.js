@@ -252,6 +252,10 @@ socket.on('state', function (data) {
     }
 });
 socket.on('history', function (data) {
+    to_hide = document.getElementsByClassName("go_hide");
+    for (i = 0 ; i < to_hide.length ; i++) {
+        to_hide[i].innerHTML = "(hidden)";
+    }
     var items;
     // Collect related history items together (but don't bother searching too far back).
     for (var i = 0; i < 10 && i < vm.history().length; i++) {
