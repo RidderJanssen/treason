@@ -1527,8 +1527,21 @@ module.exports = function createGame(options) {
         }
     }
 
+    function sanitize(string) {
+      const map = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#x27;',
+          "/": '&#x2F;',
+      };
+      const reg = /[&<>"'/]/ig;
+      return string.replace(reg, (match)=>(map[match]));
+    }
+
     function createCard(playerIdx, card) {
-        DECK.push(card);
+        DECK.push(sanitize(card));
         addHistory('cardinput', curTurnHistGroup(), "{%d} added a card to the deck", playerIdx)
     }
 
