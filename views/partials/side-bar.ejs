@@ -19,7 +19,7 @@
             </div>
             <div class="col-xs-6">
                 <!-- ko foreach: influence -->
-                    <span class="label" data-bind="text: role, css: labelClass(role(), revealed()), tooltip: { title: roleDescription(role()), trigger: 'hover', placement: 'right' }" style="color: black;"></span><br/>
+                    <span class="label" data-bind="html: role, css: labelClass(role(), revealed()), tooltip: { title: roleDescription(role()), trigger: 'hover', placement: 'right' }" style="color: black;"></span><br/>
                 <!-- /ko -->
             </div>
         </div>
