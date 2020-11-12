@@ -42,9 +42,9 @@ const actionMessages = {
     'exchange': (idx) => `{${idx}} attempted to exchange`,
     'interrogate': (idx, target) => `{${idx}} attempted to interrogate {${target}}`,
     'embezzle': (idx, target, action, state) => `{${idx}} attempted to embezzle $${state.treasuryReserve}`,
-    'draw': (idx) => `{${idx}} drew a card`,
+    'point': (idx) => `{${idx}} drew a card`,
     'skip': (idx) => `{${idx}} skipped this guess and got a new card`,
-    'time': (idx) => `Time is up! Next player can have a go`
+    'time up': (idx) => `Time is up! Next player can have a go`
 }
 
 module.exports = function createGame(options) {
@@ -755,7 +755,7 @@ module.exports = function createGame(options) {
             playerState.cash -= action.cost;
             if (action.roles == null && action.blockedBy == null) {
                 if (playAction(playerIdx, command, false)) {
-                    if (command.action == "time") {
+                    if (command.action == "time up") {
                         nextTurn();
                     }
                 }
@@ -1234,21 +1234,21 @@ module.exports = function createGame(options) {
 
         // If the HAND is empty, stop the game
         if (playerState.influence[0].role == EMPTY) {
-            addHistory('time', curTurnHistGroup(), 'The deck is empty!');
+            addHistory('time up', curTurnHistGroup(), 'The deck is empty!');
             checkForGameEnd();
             return true;
         }
 
         playerState.cash += action.gain || 0;
         message = ""
-        if ((actionState.action == 'draw') || (actionState.action == 'skip')) {
+        if ((actionState.action == 'point') || (actionState.action == 'skip')) {
             if (actionState.action == 'skip') {
                 //First put the old card back into the deck, and shuffle.
                 deck = shuffle(deck.concat( playerState.influence[0].role ))
                 playerState.influence[0].role = PLACEHOLDER
                 message += "The card was skipped"
             } else {
-                // actionState.action == 'draw'
+                // actionState.action == 'point'
                 message += "The card was guessed"
             }
             // The player draws a new card.
@@ -1261,14 +1261,14 @@ module.exports = function createGame(options) {
             }
             addHistory(actionState.action, curTurnHistGroup(), message, playerIdx);
             checkForGameEnd();
-        } else if (actionState.action == 'time') {
+        } else if (actionState.action == 'time up') {
             // Put the old card back into the deck
             deck = shuffle(deck.concat( playerState.influence[0].role ))
             playerState.influence[0].role = PLACEHOLDER
             // give the next player a new card
             var NextPlayerIdx = nextPlayerIdx();
             state.players[NextPlayerIdx].influence[0].role = (deck.pop() || EMPTY);
-            addHistory('time', curTurnHistGroup(), 'Time is up! Next player can have a go');
+            addHistory('time up', curTurnHistGroup(), 'Time is up! Next player can have a go');
         } else if (actionState.action == 'assassinate') {
             message = format('{%d} assassinated {%d}', playerIdx, actionState.target);
             target = state.players[actionState.target];

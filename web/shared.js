@@ -2,14 +2,14 @@
     'use strict';
 
     var actions = {
-        'draw': {
+        'point': {
             cost: 0,
             gain: 1
         },
         'skip': {
             cost: 0
         },
-        'time': {
+        'time up': {
             cost: 0
         }
         // 'coup': {
